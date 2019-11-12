@@ -2,6 +2,7 @@
 #define GRAINGROWTH_H
 #include "Grain.h"
 #include "Id.h"
+#include "Neighbourhood.h"
 
 
 class GrainGrowth
@@ -12,7 +13,8 @@ class GrainGrowth
         int z;
         int number_of_inclusioin;
         Id* id;
-        Grain*** matrix;
+        Grain*** matrix01;
+        Grain*** matrix02;
 
         void printMatrix();
         GrainGrowth(int, int, int, int);

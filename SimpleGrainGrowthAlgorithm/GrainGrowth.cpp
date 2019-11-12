@@ -18,14 +18,17 @@ GrainGrowth::GrainGrowth(int x, int y, int z, int number_of_inclusioin)
     int k = 0;
 
     id = new Id[number_of_inclusioin];
-    matrix = new Grain**[x];
+    matrix01 = new Grain**[x];
+    matrix02 = new Grain**[x];
 
     for(i = 0 ; i < x ; i++)
     {
-        matrix[i] = new Grain*[y];
+        matrix01[i] = new Grain*[y];
+        matrix02[i] = new Grain*[y];
         for(j = 0 ; j < y ; j++)
         {
-            matrix[i][j] = new Grain[z];
+            matrix01[i][j] = new Grain[z];
+            matrix02[i][j] = new Grain[z];
         }
     }
     //double licznik = 0;
@@ -35,7 +38,7 @@ GrainGrowth::GrainGrowth(int x, int y, int z, int number_of_inclusioin)
         {
             for(k = 0 ; k < z ; k++)
             {
-                matrix[i][j][k].setPosition(i,j,k);
+                matrix01[i][j][k].setPosition(i,j,k);
             }
         }
     }
@@ -60,14 +63,43 @@ void GrainGrowth::randomizeGrain()
         int random_y_position = rand()%y;
         int random_z_position = rand()%z;
         //cout << random_x_position << endl;
-        matrix[random_x_position][random_y_position][random_z_position].setId(&id[i]);
+        matrix01[random_x_position][random_y_position][random_z_position].setId(&id[i]);
     }
 }
 
 
 void GrainGrowth::startGrowth()
 {
+    int i,j,k;
+    Neighbourhood n1;
 
+    for(int m = 0 ; m < 1 ; m++)    // 1 msc step
+    {
+        for(i = 0 ; i < x ; i++)
+        {
+            for(j = 0 ; j < y ; j++)
+            {
+                for(k = 0 ; k < z ; k++)
+                {
+                    matrix02 = matrix01;
+                }
+            }
+        }
+
+        for(i = 0 ; i + 1 < x ; i++)
+        {
+            for(j = 0 ; j + 1 < y  ; j++)
+            {
+                for(k = 0 ; k + 1 < z  ; k++)
+                {
+                    matrix01[i][j][k].id = n1.getBestNeighbour(i,j,k,matrix02);
+                    //n1.getBestNeighbour(i,j,k,matrix02);
+                    cout << matrix01[i][j][k].id  << endl;
+                }
+            }
+        }
+
+    }
 
 }
 
@@ -83,19 +115,19 @@ void GrainGrowth::startGrowth()
 void GrainGrowth::printMatrix()
 {
     int i,j,k;
-    for(i = 0 ; i < x ; i++)
+    for(i = 1 ; i + 1< x ; i++)
     {
-        for(j = 0 ; j < y ; j++)
+        for(j = 1 ; j + 1 < y ; j++)
         {
-            for(k = 0 ; k < z ; k++)
+            for(k = 1 ; k + 1< z ; k++)
             {
-                if(matrix[i][j][k].id != 0)
+                if(matrix01[i][j][k].id != 0)
                 {
                     cout << "A" << " ";
                 }
                 else
                 {
-                    cout << matrix[i][j][k].id << " ";
+                    cout << matrix01[i][j][k].id << " ";
                 }
 
             }
