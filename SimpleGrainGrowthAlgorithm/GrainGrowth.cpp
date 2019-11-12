@@ -28,9 +28,6 @@ GrainGrowth::GrainGrowth(int x, int y, int z, int number_of_inclusioin)
             matrix[i][j] = new Grain[z];
         }
     }
-
-
-
     //double licznik = 0;
     for(i = 0 ; i < x ; i++)
     {
@@ -42,10 +39,6 @@ GrainGrowth::GrainGrowth(int x, int y, int z, int number_of_inclusioin)
             }
         }
     }
-
-
-
-
 }
 
 void GrainGrowth::randomizeGrain()
@@ -60,7 +53,6 @@ void GrainGrowth::randomizeGrain()
         //cout << id[i].color_r << "  " << id[i].color_g << "   " <<  id[i].color_b <<"  " << id[i].alpha<< endl;
 
     }
-
     // set random position for inclusion
     for(i = 0 ; i < number_of_inclusioin ; i++)
     {
@@ -71,6 +63,22 @@ void GrainGrowth::randomizeGrain()
         matrix[random_x_position][random_y_position][random_z_position].setId(&id[i]);
     }
 }
+
+
+void GrainGrowth::startGrowth()
+{
+
+
+}
+
+
+
+
+
+
+
+
+//********************************************************************************************************/
 
 void GrainGrowth::printMatrix()
 {

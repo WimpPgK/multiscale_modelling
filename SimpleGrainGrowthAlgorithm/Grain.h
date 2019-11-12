@@ -10,6 +10,8 @@ class Grain
         void setPosition(int,int,int);
         void setId(Id*);
        // void setColor(double,double,double);
+
+        Id* getId();
         void getValues();
         void getColor();
         void getPisition();

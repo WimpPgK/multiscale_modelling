@@ -20,6 +20,11 @@ void Grain::setId(Id* id)
     this->id = id;
 }
 
+Id* Grain::getId()
+{
+    return id;
+}
+
 Grain::~Grain()
 {
 

@@ -16,6 +16,7 @@ class GrainGrowth
 
         void printMatrix();
         GrainGrowth(int, int, int, int);
+        void startGrowth();
         void randomizeGrain();
         virtual ~GrainGrowth();
 
