@@ -1,7 +1,9 @@
 *.*
 !.gitattributes
-!.gitignore
+!.gitignores
 !readme.md
 !.gitkeep
 !*.cpp
 !*.h
+!*.frag
+!*.vert
