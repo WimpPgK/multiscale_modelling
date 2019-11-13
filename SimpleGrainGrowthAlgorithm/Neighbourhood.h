@@ -16,7 +16,7 @@ class Neighbourhood
     protected:
 
     private:
-        int tab[26];
+
         void mostFrequentValue_NaiveAlgorithm();
 };
 

@@ -72,8 +72,16 @@ void GrainGrowth::startGrowth()
 {
     int i,j,k;
     Neighbourhood n1;
+    Id *kkk = new Id;
 
-    for(int m = 0 ; m < 1 ; m++)    // 1 msc step
+    /*cout << "matrix01[i][j][k].id  " << matrix01[1][1][1].id << "                matrix02[i][j][k].id" << matrix02[1][1][1].id << endl;
+    matrix02[1][1][1].id = kkk;
+    cout << "matrix01[i][j][k].id  " << matrix01[1][1][1].id << "                matrix02[i][j][k].id" << matrix02[1][1][1].id << endl;*/
+
+
+
+
+    for(int m = 0 ; m < 2 ; m++)    // 1 msc step
     {
         for(i = 0 ; i < x ; i++)
         {
@@ -81,7 +89,13 @@ void GrainGrowth::startGrowth()
             {
                 for(k = 0 ; k < z ; k++)
                 {
-                    matrix02 = matrix01;
+                    matrix02[i][j][k].alpha = matrix01[i][j][k].alpha;
+                    matrix02[i][j][k].color_b = matrix01[i][j][k].color_b;
+                    matrix02[i][j][k].color_g = matrix01[i][j][k].color_g;
+                    matrix02[i][j][k].color_r = matrix01[i][j][k].color_r;
+                    matrix02[i][j][k].id = matrix01[i][j][k].id;
+                    matrix02[i][j][k].position_x = matrix01[i][j][k].position_x;
+                    matrix02[i][j][k].position_y = matrix01[i][j][k].position_y;
                 }
             }
         }
@@ -94,12 +108,15 @@ void GrainGrowth::startGrowth()
                 {
                     matrix01[i][j][k].id = n1.getBestNeighbour(i,j,k,matrix02);
                     //n1.getBestNeighbour(i,j,k,matrix02);
-                    cout << matrix01[i][j][k].id  << endl;
+                    //cout << matrix01[i][j][k].id  << endl;
                 }
             }
         }
+        printMatrix();
+        cout << "*********************************************" << endl;
 
     }
+
 
 }
 
@@ -115,15 +132,15 @@ void GrainGrowth::startGrowth()
 void GrainGrowth::printMatrix()
 {
     int i,j,k;
-    for(i = 1 ; i + 1< x ; i++)
+    for(i = 0 ; i < x ; i++)
     {
-        for(j = 1 ; j + 1 < y ; j++)
+        for(j = 0 ; j < y ; j++)
         {
-            for(k = 1 ; k + 1< z ; k++)
+            for(k = 1 ; k < z ; k++)
             {
                 if(matrix01[i][j][k].id != 0)
                 {
-                    cout << "A" << " ";
+                   cout << matrix01[i][j][k].id  <<" " ;
                 }
                 else
                 {

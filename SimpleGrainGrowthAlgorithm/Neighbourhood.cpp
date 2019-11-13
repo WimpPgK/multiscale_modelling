@@ -6,7 +6,7 @@ Neighbourhood::Neighbourhood()
     int i;
     for(i = 0 ; i < 26 ; i++)
     {
-        tab[i] = -1;
+
     }
 }
 void mostFrequentValue_NaiveAlgorithm(Id**);
@@ -20,7 +20,7 @@ Id* Neighbourhood::getBestNeighbour(int x, int y, int z, Grain*** matrix)
     //MOORE
     Id** pom = new Id*[26];
 
-    if(x != 0 && y!= 0 && z!=0)
+    if(x != 0 && y != 0 && z!=0)
     {
 
        //over the grain
@@ -55,26 +55,41 @@ Id* Neighbourhood::getBestNeighbour(int x, int y, int z, Grain*** matrix)
         pom [23] = matrix[x-1][y+1][z-1].getId();
         pom [24] = matrix[x-1][y][z-1].getId();
         pom [25] = matrix[x-1][y-1][z-1].getId();
+        return mostFrequentValue_NaiveAlgorithm(pom);
+
     }
 
-    return mostFrequentValue_NaiveAlgorithm(pom);
+
+
+    //cout << mostFrequentValue_NaiveAlgorithm(pom)  << "  ";
+    return 0;
 }
 
 
-Id* Neighbourhood::mostFrequentValue_NaiveAlgorithm(Id**id)
+Id* Neighbourhood::mostFrequentValue_NaiveAlgorithm(Id** tab)
 {
     int i,j;
     int counter = 0;
     int maxValue = 0;
     Id* mostFrequent = 0;
     Id* pom = 0;
+
+    /*
+    for (i = 0 ; i < 26 ; i++)
+    {
+        cout << "s" << tab[i] ;
+    }
+    cout << endl;
+    */
+
     for(i = 0 ; i < 26 ; i++)
     {
-        pom = id[i];
+        pom = tab[i];
         for (j = 0 ; j < 26 ; j++)
         {
-            if(pom == id[j] && id[j] != 0)
+            if(pom == tab[j] && tab[j] != 0)
             {
+                //cout <<"counter dziala" << endl;
                 counter++;
             }
         }
@@ -83,6 +98,15 @@ Id* Neighbourhood::mostFrequentValue_NaiveAlgorithm(Id**id)
             maxValue = counter;
             mostFrequent = pom;
         }
+        counter = 0;
+
+    }
+
+    if(mostFrequent == 0)
+    {
+        //cout << mostFrequent << "AAA" << endl;
+        return 0;
+
     }
 
 
