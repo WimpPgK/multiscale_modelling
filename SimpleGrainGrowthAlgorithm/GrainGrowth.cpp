@@ -137,7 +137,7 @@ void GrainGrowth::printMatrix()
 {
     int i,j,k;
 
-	delete[] id;
+	//delete[] id;
     for(i = 0 ; i < x ; i++)
     {
         for(j = 0 ; j < y ; j++)
