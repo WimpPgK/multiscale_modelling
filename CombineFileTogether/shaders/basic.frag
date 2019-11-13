@@ -6,12 +6,9 @@
 //-----------------------------------------------------------------------------
 #version 330 core
 
-in vec2 TexCoord;
+in vec4 vert_color;
 out vec4 frag_color;
-
-uniform sampler2D texSampler1;
-
 void main()
 {
-	 frag_color = vec4(0.2f, 0.f, 0.f, 0.0f);
-}
+    frag_color = vec4(vert_color);
+};

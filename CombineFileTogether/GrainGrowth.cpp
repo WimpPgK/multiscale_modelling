@@ -183,7 +183,7 @@ float* GrainGrowth::getColors()
 
 	//colors[counter] = matrix01[i][j][k].id->color_r;
 	//counter += 3;
-	return 0;
+	return colors;
 
 }
 

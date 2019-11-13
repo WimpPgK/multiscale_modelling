@@ -46,39 +46,43 @@ int main()
 	/*************************************************************/
 	/*                      LOAD FROM GUI                        */
 	/*************************************************************/
-	int x = 50;
-	int y = 50;
-	int z = 50;
-	int number_of_grains = 10;
+	int x = 10;
+	int y = 10;
+	int z = 10;
+	int number_of_grains = 2;
 	
 	
 	/*************************************************************/
 	/*                 GENERATE CUBE VERTICES                    */
 	/*************************************************************/
-	int n = x * y * z * 180;
+	int n = x * y * z * 108;
 	OpenGLCubeMesh m1 = OpenGLCubeMesh(x, y, z, 0.0);
 	m1.normalizeVertices();
 	int i = 0;
-	float * vertices = m1.getVertices();
+	float * vert_pos = m1.getVertices();
 
 	/*************************************************************/
 	/*                 GENERATE CUBE COLORS                      */
 	/*************************************************************/
+	x *= 5;
+	y *= 5;
+	z *= 5;
 	GrainGrowth g1 = GrainGrowth(x + 2, y + 2, z + 2, number_of_grains);
 	g1.randomizeGrain();
 	//g1.printMatrix();
 	g1.startGrowth();
 	//g1.saveToFile();
 	//g1.printMatrix();
-	float* colors = g1.getColors();
+	float* vert_colors = g1.getColors();
+	for (i = 0; i < 100; i++)
+		cout << vert_colors[i] << endl;
+
+
 
 
 
 
 	
-
-
-
 
 
 
@@ -87,31 +91,43 @@ int main()
 	// Cube position
 	glm::vec3 cubePos = glm::vec3(0.0f, 0.0f, -5.0f);
 
+
+
 	// 2. Set up buffers on the GPU
-	GLuint vbo, vao;
+	GLuint vbo, vbo2, vao;
 
 	glGenBuffers(1, &vbo);					// Generate an empty vertex buffer on the GPU
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);		// "bind" or set as the current buffer we are working with
-	glBufferData(GL_ARRAY_BUFFER, n*sizeof(float), vertices, GL_STATIC_DRAW);	// copy the data from CPU to GPU
+	glBufferData(GL_ARRAY_BUFFER, n*sizeof(float), vert_pos, GL_STATIC_DRAW);	// copy the data from CPU to GPU
 
-	glGenVertexArrays(1, &vao);				// Tell OpenGL to create new Vertex Array Object
-	glBindVertexArray(vao);					// Make it the current one
+	glGenBuffers(1, &vbo2);																// Generate an empty vertex buffer on the GPU
+	glBindBuffer(GL_ARRAY_BUFFER, vbo2);												// "bind" or set as the current buffer we are working with
+	glBufferData(GL_ARRAY_BUFFER, x*y*z*4* sizeof(float), vert_colors, GL_STATIC_DRAW);	// copy the data from CPU to GPU
+	
 
-	// Position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(0));
-	glEnableVertexAttribArray(0);
+	
+	// The vertex array object (VAO) is a little descriptor that defines which data from vertex buffer objects should be used as input 
+	// variables to vertex shaders.
+	glGenVertexArrays(1, &vao);									// Tell OpenGL to create new Vertex Array Object
+	glBindVertexArray(vao);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);							// Make the position buffer the current one
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);	// Define a layout for the first vertex buffer "0"
+	glEnableVertexAttribArray(0);								// Enable the first attribute or attribute "0"
 
-	// Texture Coord attribute
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(1);
 
-	glBindVertexArray(0);					// unbind to make sure other code doesn't change it
+
+
+
+
+	// Now bind the color VBO and set the vertix attrib pointer
+	glBindBuffer(GL_ARRAY_BUFFER, vbo2);						// Make the color buffer the current one, now
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, NULL);	// Define a layout for the second vertex buffer "1"
+	glEnableVertexAttribArray(1);								// Enable the first attribute or attribute "1"
+
+	
 
 	ShaderProgram shaderProgram;
 	shaderProgram.loadShaders("shaders/basic.vert", "shaders/basic.frag");
-
-	Texture2D texture;
-	texture.loadTexture(texture1, true);
 
 	double lastTime = glfwGetTime();
 	float cubeAngle = 0.0f;
@@ -130,12 +146,12 @@ int main()
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		texture.bind(0);
+		
 
 		glm::mat4 model(1.0), view(1.0), projection(1.0);
 
 		// Update the cube position and orientation.  Rotate first then translate
-		cubeAngle += (float)(deltaTime * 50.0f);
+		cubeAngle += (float)(deltaTime * 20.0f);
 		if (cubeAngle >= 360.0f) cubeAngle = 0.0f;
 
 		// Rotates around the cube center
@@ -163,7 +179,7 @@ int main()
 		shaderProgram.setUniform("model", model);
 		shaderProgram.setUniform("view", view);
 		shaderProgram.setUniform("projection", projection);
-
+		
 		glBindVertexArray(vao);
 		glDrawArrays(GL_TRIANGLES, 0, x*y*z*36);
 		glBindVertexArray(0);
