@@ -18,7 +18,7 @@ Id* Neighbourhood::getBestNeighbour(int x, int y, int z, Grain*** matrix)
 
     int licznik;
     //MOORE
-    Id** pom = new Id*[26];
+    //pom = new Id*[26];
 
     if(x != 0 && y != 0 && z!=0)
     {
@@ -117,5 +117,5 @@ Id* Neighbourhood::mostFrequentValue_NaiveAlgorithm(Id** tab)
 
 Neighbourhood::~Neighbourhood()
 {
-    //dtor
+	cout << "kasuje" << endl;
 }

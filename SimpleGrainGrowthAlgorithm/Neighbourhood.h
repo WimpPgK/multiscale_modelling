@@ -7,7 +7,7 @@
 class Neighbourhood
 {
     public:
-
+		Id* pom[28];
         Neighbourhood();
         Id* getBestNeighbour(int, int, int, Grain*** );
         Id* mostFrequentValue_NaiveAlgorithm(Id**);

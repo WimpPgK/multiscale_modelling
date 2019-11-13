@@ -6,10 +6,10 @@ using namespace std;
 
 int main()
 {
-    int x = 100;
-    int y = 100;
-    int z = 100;
-    int number_of_inclusioin = 5000;
+    int x = 200;
+    int y = 200;
+    int z = 200;
+    int number_of_inclusioin = 50000;
     GrainGrowth g1 = GrainGrowth(x,y,z,number_of_inclusioin);
     g1.randomizeGrain();
     //g1.printMatrix();

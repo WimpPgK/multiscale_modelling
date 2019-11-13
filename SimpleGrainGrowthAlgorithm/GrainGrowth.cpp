@@ -72,13 +72,7 @@ void GrainGrowth::startGrowth()
 {
     int i,j,k;
     Neighbourhood n1;
-    Id *kkk = new Id;
-
-    /*cout << "matrix01[i][j][k].id  " << matrix01[1][1][1].id << "                matrix02[i][j][k].id" << matrix02[1][1][1].id << endl;
-    matrix02[1][1][1].id = kkk;
-    cout << "matrix01[i][j][k].id  " << matrix01[1][1][1].id << "                matrix02[i][j][k].id" << matrix02[1][1][1].id << endl;*/
-
-
+   
 
     bool process = true;
     int counter = 0;
@@ -140,6 +134,8 @@ void GrainGrowth::startGrowth()
 void GrainGrowth::printMatrix()
 {
     int i,j,k;
+
+	delete[] id;
     for(i = 0 ; i < x ; i++)
     {
         for(j = 0 ; j < y ; j++)
@@ -165,5 +161,28 @@ void GrainGrowth::printMatrix()
 
 GrainGrowth::~GrainGrowth()
 {
-    //dtor
+	
+	int i = 0;
+	int j = 0;
+	int k = 0;
+
+	/*
+	for (i = 0; i < y; i++)
+	{
+		for (j = 0; j < z; j++)
+		{
+			delete [] matrix01[i][j];
+			delete [] matrix02[i][j];
+		}
+	}
+
+	for (i = 0; i < x; i++)
+	{
+		delete [] matrix01[i];
+		delete [] matrix02[i];
+		
+	}
+	delete matrix01;
+	delete matrix02;
+	*/
 }
