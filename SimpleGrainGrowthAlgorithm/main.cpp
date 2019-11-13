@@ -6,18 +6,18 @@ using namespace std;
 
 int main()
 {
-    int x = 4;
-    int y = 20;
-    int z = 20;
-    int number_of_inclusioin = 2;
+    int x = 100;
+    int y = 100;
+    int z = 100;
+    int number_of_inclusioin = 5000;
     GrainGrowth g1 = GrainGrowth(x,y,z,number_of_inclusioin);
     g1.randomizeGrain();
-    g1.printMatrix();
+    //g1.printMatrix();
         cout <<"***********************************" << endl;
     cout << endl;
 
     g1.startGrowth();
-
+    //g1.printMatrix();
 
 
 

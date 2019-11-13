@@ -80,9 +80,11 @@ void GrainGrowth::startGrowth()
 
 
 
-
-    for(int m = 0 ; m < 2 ; m++)    // 1 msc step
+    bool process = true;
+    int counter = 0;
+    while(process)    // 1 msc step
     {
+        process =  false;
         for(i = 0 ; i < x ; i++)
         {
             for(j = 0 ; j < y ; j++)
@@ -100,20 +102,26 @@ void GrainGrowth::startGrowth()
             }
         }
 
-        for(i = 0 ; i + 1 < x ; i++)
+        for(i = 1 ; i + 1 < x ; i++)
         {
-            for(j = 0 ; j + 1 < y  ; j++)
+            for(j = 1 ; j + 1 < y  ; j++)
             {
-                for(k = 0 ; k + 1 < z  ; k++)
+                for(k = 1 ; k + 1 < z  ; k++)
                 {
+                    if(n1.getBestNeighbour(i,j,k,matrix02)== 0)
+                    {
+                        process = true;
+                    }
                     matrix01[i][j][k].id = n1.getBestNeighbour(i,j,k,matrix02);
                     //n1.getBestNeighbour(i,j,k,matrix02);
                     //cout << matrix01[i][j][k].id  << endl;
                 }
             }
         }
-        printMatrix();
-        cout << "*********************************************" << endl;
+        //printMatrix();
+        //cout << "*********************************************" << endl;
+        counter ++;
+        cout << "Iteracja: " << counter << endl;
 
     }
 
