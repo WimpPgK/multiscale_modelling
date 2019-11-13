@@ -22,6 +22,7 @@ class GrainGrowth
         void startGrowth();
         void randomizeGrain();
 		float* getColors();
+		float* getNormalizedColorsAmount();
 		void saveToFile();
         virtual ~GrainGrowth();
 

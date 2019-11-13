@@ -161,6 +161,9 @@ void GrainGrowth::printMatrix()
     }
 }
 
+
+// return (r,g,b,alpha) for every cube
+// 1 cube contain only 1 rgba
 float* GrainGrowth::getColors()
 {
 	float* colors = new float[x * y * z * 4];
@@ -180,11 +183,41 @@ float* GrainGrowth::getColors()
 			}
 		}
 	}
-
-	//colors[counter] = matrix01[i][j][k].id->color_r;
-	//counter += 3;
 	return colors;
 
+}
+
+
+// 1 cube is is build with 36 triangles
+// our logic is build for cube build from 1 point
+// if we want to cerate OpenGl buffer we ned to define
+// every triangle point
+float* GrainGrowth::getNormalizedColorsAmount()
+{
+	float* colors = new float[x * y * z * 4*36];
+	int counter = 0;
+	int i, j, k, m;
+	for (i = 1; i + 1 < x; i++)
+	{
+		for (j = 1; j + 1 < y; j++)
+		{	
+			for (k = 1; k + 1 < z; k++)
+			{
+				for (m = 0; m < 36; m++)
+				{
+					colors[counter] = matrix01[i][j][k].id->color_r;
+					colors[counter + 1] = matrix01[i][j][k].id->color_g;
+					colors[counter + 2] = matrix01[i][j][k].id->color_b;
+					colors[counter + 3] = matrix01[i][j][k].id->alpha;
+					counter += 4;
+				}
+
+			}
+			
+		}
+	}
+	cout << "*****************  " << counter << endl;
+	return colors;
 }
 
 void GrainGrowth::saveToFile()

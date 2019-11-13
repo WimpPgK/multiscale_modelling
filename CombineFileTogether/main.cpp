@@ -46,10 +46,10 @@ int main()
 	/*************************************************************/
 	/*                      LOAD FROM GUI                        */
 	/*************************************************************/
-	int x = 10;
-	int y = 10;
-	int z = 10;
-	int number_of_grains = 2;
+	int x = 20;
+	int y = 20;
+	int z = 20;
+	int number_of_grains = 10;
 	
 	
 	/*************************************************************/
@@ -64,18 +64,14 @@ int main()
 	/*************************************************************/
 	/*                 GENERATE CUBE COLORS                      */
 	/*************************************************************/
-	x *= 5;
-	y *= 5;
-	z *= 5;
-	GrainGrowth g1 = GrainGrowth(x + 2, y + 2, z + 2, number_of_grains);
+	GrainGrowth g1 = GrainGrowth(x+2, y+2, z+2, number_of_grains);
 	g1.randomizeGrain();
 	//g1.printMatrix();
 	g1.startGrowth();
 	//g1.saveToFile();
 	//g1.printMatrix();
-	float* vert_colors = g1.getColors();
-	for (i = 0; i < 100; i++)
-		cout << vert_colors[i] << endl;
+	//float* vert_colors = g1.getColors();
+	float* vert_colors = g1.getNormalizedColorsAmount();
 
 
 
@@ -102,7 +98,7 @@ int main()
 
 	glGenBuffers(1, &vbo2);																// Generate an empty vertex buffer on the GPU
 	glBindBuffer(GL_ARRAY_BUFFER, vbo2);												// "bind" or set as the current buffer we are working with
-	glBufferData(GL_ARRAY_BUFFER, x*y*z*4* sizeof(float), vert_colors, GL_STATIC_DRAW);	// copy the data from CPU to GPU
+	glBufferData(GL_ARRAY_BUFFER, x*y*z*4*36* sizeof(float), vert_colors, GL_STATIC_DRAW);	// copy the data from CPU to GPU
 	
 
 	
