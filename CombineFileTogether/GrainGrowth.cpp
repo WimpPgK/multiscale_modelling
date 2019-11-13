@@ -220,6 +220,8 @@ float* GrainGrowth::getNormalizedColorsAmount()
 	return colors;
 }
 
+
+
 void GrainGrowth::saveToFile()
 {
 	FileOperatorColor f1;
