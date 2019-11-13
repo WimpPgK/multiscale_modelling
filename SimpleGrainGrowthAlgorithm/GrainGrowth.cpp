@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 
+
 using namespace std;
 
 GrainGrowth::GrainGrowth(int x, int y, int z, int number_of_inclusioin)
@@ -43,6 +44,7 @@ GrainGrowth::GrainGrowth(int x, int y, int z, int number_of_inclusioin)
         }
     }
 }
+
 
 void GrainGrowth::randomizeGrain()
 {
@@ -157,6 +159,13 @@ void GrainGrowth::printMatrix()
 
         cout << endl << endl <<endl;
     }
+}
+
+void GrainGrowth::saveToFile()
+{
+	FileOperator f1;
+	f1.saveToFile(matrix01, x, y, z);
+
 }
 
 GrainGrowth::~GrainGrowth()

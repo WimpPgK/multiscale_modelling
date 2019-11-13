@@ -3,6 +3,7 @@
 #include "Grain.h"
 #include "Id.h"
 #include "Neighbourhood.h"
+#include "FileOperator.h"
 
 
 class GrainGrowth
@@ -20,6 +21,7 @@ class GrainGrowth
         GrainGrowth(int, int, int, int);
         void startGrowth();
         void randomizeGrain();
+		void saveToFile();
         virtual ~GrainGrowth();
 
     protected:
