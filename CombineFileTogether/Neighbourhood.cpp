@@ -17,47 +17,50 @@ Id* Neighbourhood::getBestNeighbour(int x, int y, int z, Grain*** matrix)
 {
 
     int licznik;
+	Id* returnValue;
     //MOORE
     //pom = new Id*[26];
 
-    if(x != 0 && y != 0 && z!=0)
-    {
-
-       //over the grain
-        pom [0] = matrix[x+1][y+1][z+1].getId();
-        pom [1] = matrix[x+1][y][z+1].getId();
-        pom [2] = matrix[x+1][y-1][z+1].getId();
-        pom [3] = matrix[x][y+1][z+1].getId();
-        pom [4] = matrix[x][y][z+1].getId();
-        pom [5] = matrix[x][y-1][z+1].getId();
-        pom [6] = matrix[x-1][y+1][z+1].getId();
-        pom [7] = matrix[x-1][y][z+1].getId();
-        pom [8] = matrix[x-1][y-1][z+1].getId();
-
-        // on the same level
-        pom [9] = matrix[x+1][y+1][z].getId();
-        pom [10] = matrix[x+1][y][z].getId();
-        pom [11] = matrix[x+1][y-1][z].getId();
-        pom [12] = matrix[x][y+1][z].getId();
-        pom [13] = matrix[x][y-1][z].getId();
-        pom [14] = matrix[x-1][y+1][z].getId();
-        pom [15] = matrix[x-1][y][z].getId();
-        pom [16] = matrix[x-1][y-1][z].getId();
+	//create moore tab
+	//check neighbour
+	//chance of change
+	
+	/*
+	Moore m1 = Moore();
+	pom = m1.GetNeighborTab(x, y, z, matrix);
+	returnValue = mostFrequentValue_NaiveAlgorithm(pom,26, 0);
+	if (returnValue != 0)
+	{
+		return returnValue;
+	}
+	*/
 
 
-        // under the grain
-        pom [17] = matrix[x+1][y+1][z-1].getId();
-        pom [18] = matrix[x+1][y][z-1].getId();
-        pom [19] = matrix[x+1][y-1][z-1].getId();
-        pom [20] = matrix[x][y+1][z-1].getId();
-        pom [21] = matrix[x][y][z-1].getId();
-        pom [22] = matrix[x][y-1][z-1].getId();
-        pom [23] = matrix[x-1][y+1][z-1].getId();
-        pom [24] = matrix[x-1][y][z-1].getId();
-        pom [25] = matrix[x-1][y-1][z-1].getId();
-        return mostFrequentValue_NaiveAlgorithm(pom);
 
-    }
+	//create nearest moore
+	//check neighbour
+	//chance of change
+	NearestMoore n1 = NearestMoore();
+	pom = n1.GetNeighborTab(x, y, z, matrix);
+	returnValue = mostFrequentValue_NaiveAlgorithm(pom, 6, 0);
+	if (returnValue != 0)
+	{
+		return returnValue;
+	}
+
+
+
+
+	//create futher moore
+	//check neighbour
+	//chance of change
+
+
+  
+
+       
+
+    
 
 
 
@@ -66,7 +69,7 @@ Id* Neighbourhood::getBestNeighbour(int x, int y, int z, Grain*** matrix)
 }
 
 
-Id* Neighbourhood::mostFrequentValue_NaiveAlgorithm(Id** tab)
+Id* Neighbourhood::mostFrequentValue_NaiveAlgorithm(Id** tab, int n, int minFreq)
 {
     int i,j;
     int counter = 0;
@@ -74,18 +77,11 @@ Id* Neighbourhood::mostFrequentValue_NaiveAlgorithm(Id** tab)
     Id* mostFrequent = 0;
     Id* pom = 0;
 
-    /*
-    for (i = 0 ; i < 26 ; i++)
-    {
-        cout << "s" << tab[i] ;
-    }
-    cout << endl;
-    */
 
-    for(i = 0 ; i < 26 ; i++)
+    for(i = 0 ; i < n ; i++)
     {
         pom = tab[i];
-        for (j = 0 ; j < 26 ; j++)
+        for (j = 0 ; j < n ; j++)
         {
             if(pom == tab[j] && tab[j] != 0)
             {
@@ -102,7 +98,9 @@ Id* Neighbourhood::mostFrequentValue_NaiveAlgorithm(Id** tab)
 
     }
 
-    if(mostFrequent == 0)
+	delete[] tab;
+
+    if(mostFrequent == 0 && maxValue < minFreq)
     {
         //cout << mostFrequent << "AAA" << endl;
         return 0;
