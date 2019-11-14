@@ -12,7 +12,8 @@
 #include "Texture2D.h"
 #include "OpenGLCubeMesh.h"
 #include "GrainGrowth.h"
-
+#include <windows.h>
+#include <time.h>
 
 using namespace std;
 
@@ -41,15 +42,15 @@ int main()
 		std::cerr << "GLFW initialization failed" << std::endl;
 		return -1;
 	}
-
+	
 
 	/*************************************************************/
 	/*                      LOAD FROM GUI                        */
 	/*************************************************************/
-	int x = 20;
-	int y = 20;
+	int x = 200;
+	int y = 200;
 	int z = 20;
-	int number_of_grains = 50;
+	int number_of_grains = 400;
 	
 	
 	/*************************************************************/
@@ -64,6 +65,7 @@ int main()
 	/*************************************************************/
 	/*                 GENERATE CUBE COLORS                      */
 	/*************************************************************/
+	srand(time(NULL));
 	GrainGrowth g1 = GrainGrowth(x+2, y+2, z+2, number_of_grains);
 	g1.randomizeGrain();
 	//g1.printMatrix();

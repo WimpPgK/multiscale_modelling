@@ -1,5 +1,8 @@
 #include "Neighbourhood.h"
 using namespace std;
+#include <windows.h>
+#include <time.h>
+
 
 Neighbourhood::Neighbourhood()
 {
@@ -18,35 +21,68 @@ Id* Neighbourhood::getBestNeighbour(int x, int y, int z, Grain*** matrix)
 
     int licznik;
 	Id* returnValue;
-    //MOORE
-    //pom = new Id*[26];
+    
+	/*
 
 	//create moore tab
 	//check neighbour
-	//chance of change
-	
-	/*
 	Moore m1 = Moore();
 	pom = m1.GetNeighborTab(x, y, z, matrix);
-	returnValue = mostFrequentValue_NaiveAlgorithm(pom,26, 0);
+	returnValue = mostFrequentValue_NaiveAlgorithm(pom, 26, 18);
 	if (returnValue != 0)
-	{
+	{	
+		//cout << "warunek1" << endl;
 		return returnValue;
 	}
-	*/
+	
 
 
 
 	//create nearest moore
 	//check neighbour
-	//chance of change
 	NearestMoore n1 = NearestMoore();
 	pom = n1.GetNeighborTab(x, y, z, matrix);
-	returnValue = mostFrequentValue_NaiveAlgorithm(pom, 6, 0);
+	returnValue = mostFrequentValue_NaiveAlgorithm(pom, 6, 4);
 	if (returnValue != 0)
-	{
+	{	
+		//cout << "warunek2" << endl;
 		return returnValue;
 	}
+	*/
+
+
+	/*
+	//create further moore
+	//check neighbour
+	FurtherMoore f1 = FurtherMoore();
+	pom = f1.GetNeighborTab(x, y, z, matrix);
+	returnValue = mostFrequentValue_NaiveAlgorithm(pom, 20, 14);
+	if (returnValue != 0)
+	{
+		cout << "warunek3" << endl;
+		return returnValue;
+	}
+	*/
+
+
+	
+
+	
+	// CONDITION 4
+	//double randomValue = double(rand()/(RAND_MAX));
+	//cout << randomValue << endl;
+	Moore m2 = Moore();
+	double probability = 0.4;
+	if (double(rand() / (RAND_MAX)) < probability)
+	{
+		//cout << "warunek4" << endl;
+		pom = m2.GetNeighborTab(x, y, z, matrix);
+		return mostFrequentValue_NaiveAlgorithm(pom, 26, -1);
+		
+	}
+
+
+
 
 
 
@@ -100,15 +136,15 @@ Id* Neighbourhood::mostFrequentValue_NaiveAlgorithm(Id** tab, int n, int minFreq
 
 	delete[] tab;
 
-    if(mostFrequent == 0 && maxValue < minFreq)
+    if(mostFrequent != 0 && maxValue >= minFreq)
     {
-        //cout << mostFrequent << "AAA" << endl;
-        return 0;
+
+		return mostFrequent;    //cout << mostFrequent << "AAA" << endl;
+        
 
     }
+	return 0;
 
-
-    return mostFrequent;
 }
 
 
