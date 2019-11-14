@@ -50,10 +50,10 @@ int main()
 	/*************************************************************/
 	/*                      LOAD FROM GUI                        */
 	/*************************************************************/
-	int x = 5;
-	int y = 600;
-	int z = 600;
-	int number_of_grains = 700;
+	int x = 110;
+	int y = 110;
+	int z = 110;
+	int number_of_grains = 2000;
 	
 	
 	/*************************************************************/
@@ -279,8 +279,14 @@ void glfw_onKey(GLFWwindow* window, int key, int scancode, int action, int mode)
 	if (key == GLFW_KEY_F3 && action == GLFW_PRESS)
 	{
 		
-		cubeAngle = 0.0f;
+		cubeAngle = 180.0f;
 	}
+	if (key == GLFW_KEY_F4 && action == GLFW_PRESS)
+	{
+
+		cubeAngle = 65.0f;
+	}
+
 }
 
 //-----------------------------------------------------------------------------
