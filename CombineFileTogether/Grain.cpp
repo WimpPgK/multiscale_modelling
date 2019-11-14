@@ -6,6 +6,7 @@ Grain::Grain()
     position_x = -1;
     position_y = -1;
     position_z = -1;
+	alpha = -1;
 
 }
 

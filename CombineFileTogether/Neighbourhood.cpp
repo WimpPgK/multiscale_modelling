@@ -22,7 +22,7 @@ Id* Neighbourhood::getBestNeighbour(int x, int y, int z, Grain*** matrix)
     int licznik;
 	Id* returnValue;
     
-	/*
+	
 
 	//create moore tab
 	//check neighbour
@@ -48,21 +48,21 @@ Id* Neighbourhood::getBestNeighbour(int x, int y, int z, Grain*** matrix)
 		//cout << "warunek2" << endl;
 		return returnValue;
 	}
-	*/
+	
 
 
-	/*
+	
 	//create further moore
 	//check neighbour
 	FurtherMoore f1 = FurtherMoore();
 	pom = f1.GetNeighborTab(x, y, z, matrix);
-	returnValue = mostFrequentValue_NaiveAlgorithm(pom, 20, 14);
+	returnValue = mostFrequentValue_NaiveAlgorithm(pom, 20, 17);
 	if (returnValue != 0)
 	{
-		cout << "warunek3" << endl;
+		//cout << "warunek3" << endl;
 		return returnValue;
 	}
-	*/
+	
 
 
 	
@@ -72,12 +72,12 @@ Id* Neighbourhood::getBestNeighbour(int x, int y, int z, Grain*** matrix)
 	//double randomValue = double(rand()/(RAND_MAX));
 	//cout << randomValue << endl;
 	Moore m2 = Moore();
-	double probability = 0.4;
+	double probability = 0.96;
 	if (double(rand() / (RAND_MAX)) < probability)
 	{
 		//cout << "warunek4" << endl;
 		pom = m2.GetNeighborTab(x, y, z, matrix);
-		return mostFrequentValue_NaiveAlgorithm(pom, 26, -1);
+		return mostFrequentValue_NaiveAlgorithm(pom, 26, 0);
 		
 	}
 

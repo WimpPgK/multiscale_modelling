@@ -40,6 +40,8 @@ GrainGrowth::GrainGrowth(int x, int y, int z, int number_of_inclusioin)
             for(k = 0 ; k < z ; k++)
             {
                 matrix01[i][j][k].setPosition(i,j,k);
+				matrix01[i][j][k].id = 0;
+				matrix02[i][j][k].id = 0;
             }
         }
     }
@@ -104,8 +106,10 @@ void GrainGrowth::startGrowth()
             {
                 for(k = 1 ; k + 1 < z  ; k++)
                 {
-                    if(n1.getBestNeighbour(i,j,k,matrix02)== 0)
+                    //if(n1.getBestNeighbour(i,j,k,matrix02)== 0)
+                    if(matrix01[i][j][k].id == 0)
                     {
+						//cout << "i " << i << "  j  " << j << "   k   " << k << endl;
                         process = true;
                     }
                     matrix01[i][j][k].id = n1.getBestNeighbour(i,j,k,matrix02);
@@ -204,12 +208,27 @@ float* GrainGrowth::getNormalizedColorsAmount()
 			for (k = 1; k + 1 < z; k++)
 			{
 				for (m = 0; m < 36; m++)
-				{
-					colors[counter] = matrix01[i][j][k].id->color_r;
-					colors[counter + 1] = matrix01[i][j][k].id->color_g;
-					colors[counter + 2] = matrix01[i][j][k].id->color_b;
-					colors[counter + 3] = matrix01[i][j][k].id->alpha;
-					counter += 4;
+				{	
+
+					try
+					{
+						
+						colors[counter] = matrix02[i][j][k].id->color_r;
+						colors[counter + 1] = matrix02[i][j][k].id->color_g;
+						colors[counter + 2] = matrix02[i][j][k].id->color_b;
+						colors[counter + 3] = matrix02[i][j][k].id->alpha;
+						counter += 4;
+					}
+					catch(string blad)
+					{
+						cout << "Blad pamieci " << endl;
+						colors[counter] = 1;
+						colors[counter + 1] = 1;
+						colors[counter + 1] = 1;
+						colors[counter + 1] = 1;
+					}
+
+					
 				}
 
 			}

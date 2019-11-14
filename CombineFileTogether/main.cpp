@@ -23,6 +23,9 @@ int gWindowWidth = 1024;
 int gWindowHeight = 768;
 GLFWwindow* gWindow = NULL;
 bool gWireframe = false;
+bool rotationFlag = true;
+float cubeAngle = 0.0f;
+glm::vec3 cubePos;
 const std::string texture1 = "textures/wooden_crate.jpg";
 
 // Function prototypes
@@ -47,10 +50,10 @@ int main()
 	/*************************************************************/
 	/*                      LOAD FROM GUI                        */
 	/*************************************************************/
-	int x = 200;
-	int y = 200;
-	int z = 20;
-	int number_of_grains = 400;
+	int x = 5;
+	int y = 600;
+	int z = 600;
+	int number_of_grains = 700;
 	
 	
 	/*************************************************************/
@@ -87,7 +90,7 @@ int main()
 
 
 	// Cube position
-	glm::vec3 cubePos = glm::vec3(0.0f, 0.0f, -5.0f);
+	cubePos = glm::vec3(0.0f, 0.0f, -4.0f);
 
 
 
@@ -128,7 +131,7 @@ int main()
 	shaderProgram.loadShaders("shaders/basic.vert", "shaders/basic.frag");
 
 	double lastTime = glfwGetTime();
-	float cubeAngle = 0.0f;
+	
 
 	// Rendering loop
 	while (!glfwWindowShouldClose(gWindow))
@@ -149,9 +152,13 @@ int main()
 		glm::mat4 model(1.0), view(1.0), projection(1.0);
 
 		// Update the cube position and orientation.  Rotate first then translate
-		cubeAngle += (float)(deltaTime * 20.0f);
-		if (cubeAngle >= 360.0f) cubeAngle = 0.0f;
-
+		
+		if (rotationFlag)
+		{
+			cubeAngle += (float)(deltaTime * 20.0f);
+			if (cubeAngle >= 360.0f) cubeAngle = 0.0f;
+		}
+		
 		// Rotates around the cube center
 		model = glm::translate(model, cubePos) * glm::rotate(model, glm::radians(cubeAngle), glm::vec3(0.0f, 1.0f, 0.0f));
 
@@ -264,6 +271,15 @@ void glfw_onKey(GLFWwindow* window, int key, int scancode, int action, int mode)
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		else
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+	if (key == GLFW_KEY_F2 && action == GLFW_PRESS)
+	{
+		rotationFlag = !rotationFlag;
+	}
+	if (key == GLFW_KEY_F3 && action == GLFW_PRESS)
+	{
+		
+		cubeAngle = 0.0f;
 	}
 }
 

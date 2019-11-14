@@ -18,7 +18,6 @@ class Neighbourhood
         Neighbourhood();
         Id* getBestNeighbour(int, int, int, Grain*** );
         Id* mostFrequentValue_NaiveAlgorithm(Id**, int, int);
-		void freeMemory();
         virtual ~Neighbourhood();
 
     protected:

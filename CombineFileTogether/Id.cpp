@@ -18,5 +18,5 @@ void Id::SetColor(double color_r, double color_g, double color_b, double alpha)
 }
 Id::~Id()
 {
-    //dtor
+   
 }
