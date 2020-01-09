@@ -1,6 +1,10 @@
 import numpy as np
 
-def findBorders(matrix01, matrix02, x , y, n):
+def Energy(x, y):
+    energia = np.zeros((x, y), dtype=int)
+
+
+def findBorders(matrix01, matrix02, c, n):
 
     energia = matrix01
     #energia = np.zeros((x, y), dtype=int)

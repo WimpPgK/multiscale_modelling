@@ -17,6 +17,7 @@ class Matrix:
         self.n = n
         self.grain = np.zeros((x, y), dtype=int)
         self.grainList = np.empty(n, dtype=grain.Grain)
+        self.grainEnergy = np.zeros((x, y), dtype=float)
         #self.idList = np.random.choice (0, 21478347, n)
 
 
@@ -27,8 +28,15 @@ class Matrix:
 
         self.grainList[:] = vSite(init_vector)
 
-    def __del__(self):
-        print()
+
+    def printIdList(self):
+        for m in range(self.x):
+            for n in range(self.y):
+                print(self.grain[m][n])
+
+
+
+
 
 
     def selectGrains(self, Ngrains):

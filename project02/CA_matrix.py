@@ -56,7 +56,7 @@ class Matrix:
             while self.grain[pom01][pom02] != -1 or self.grain[pom01][pom02] == -2 or self.firstPhase[pom01][pom02] != -1 and licznik < 1000:
                 pom01 = random.randint(1, self.x-2)
                 pom02 = random.randint(1, self.y-2)
-                print("Powtorzenie numer %s" % (licznik))
+                #print("Powtorzenie numer %s" % (licznik))
                 licznik += 1
             if self.grain[pom01][pom02] == -2:
                 print ("NALOZENIEQ!!!")
@@ -66,6 +66,8 @@ class Matrix:
     def algorithmCA(self, neighbourhoodType):
 
         flaga = True
+
+
         for i in range(self.x):
             for j in range(self.y):
                 self.grainPre[i][j] = self.grain[i][j]
@@ -75,10 +77,12 @@ class Matrix:
                 if self.grainPre[i][j] == -1 and self.grainPre[i][j] != -2 and self.firstPhase[i][j] == -1:
                     self.grain[i][j] = self.checkNeighbours(i,j)
 
+        self.numberOfFalse = 0
         for i in range (1, self.x-1):
             for j in range(1, self.y-1):
                 if self.grain[i][j] == -1:
                     flaga = False
+                    self.numberOfFalse += 1
 
 
         return flaga
